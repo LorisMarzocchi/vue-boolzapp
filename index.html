@@ -47,18 +47,27 @@
                     aria-label="Search">
             </div>
 
-            <div class="dinamic_card d-flex justify-content-between" v-for="element in contacts" :key="element.avatar">
-                <div class="d-flex dinamic_user">
-                    <div class="user_img d-flex">
-                        <img class="rounded-circle":src="element.avatar" alt="">
-                    </div>
-                    <div>
-                        <h6>{{element.name}}</h6>
-                        <span>{{element.message}}</span>  
+            <div 
+                class="dinamic_card d-flex justify-content-between"
+                v-for="(element, i) in contacts"
+                :key="element.avatar"
+                :class="{ active: element === activeContact }"
+                @click="selectContact(element)">
+                
+                <div class="d-flex dinamic_user justify-content-between">
+                    <div class="d-flex">
+
+                        <div class="user_img d-flex">
+                            <img class="rounded-circle":src="element.avatar" alt="">
+                        </div>
+                        <div>
+                            <h6>{{element.name}}</h6>
+                            <span>{{ element.messages[element.messages.length - 1].message }}</span>  
+                        </div>
                     </div>
 
-                    <div class="orario justify-content-end">
-                        <span>Orario</span>
+                    <div class="orario d-flex justify-content-between align-items-start">
+                        <span>{{ element.messages[element.messages.length - 1].date }}</span>
                     </div>
                 </div>
 
