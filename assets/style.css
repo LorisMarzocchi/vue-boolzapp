@@ -15,6 +15,91 @@ body{
     display: flex;
     height: 80%;
     width: 70%;
-    background-color: brown;
+    background-color: white;
+    
+
    
+}
+.sidebar{
+    width: 40%;
+    background-color: white;
+    
+}
+.main{
+    width: 60%;
+    position: relative;
+}
+.user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background-color: #EAEAEA;
+    padding: 5px;
+}
+
+.search_chat input{
+    width: 350px;
+}
+.user_img{
+    width: 50px;
+    height: 50px;
+}
+.user_img h5{
+    margin: 10px;
+}
+img{
+    width: 100%;
+    object-fit: contain;
+}
+.notifiche{
+    background-color: aqua;
+    padding: 5px;
+}
+.dinamic_card{
+    padding: 5px;
+    background-color: chartreuse;
+}
+.chat{
+    display: flex;
+    flex-direction: column;
+    background-image: url(../img/mine.jpg);
+    height: 100%;
+    width: 100%;
+    
+}
+.bottom_nav{
+    height: 60px;
+    background-color: #EAEAEA;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.write_message input{
+    width: 550px;
+}
+.mess_inviato{
+    height: 50px;
+    width: 200px;
+    border: 1px solid green;
+    margin: 20px;
+    padding: 10px;
+}
+.mess_ricevuto{
+    height: 50px;
+    width: 200px;
+    border: 1px solid red;
+    margin: 20px;
+    padding: 10px;
+
+
+}
+i {
+    color: rgb(182, 182, 182);
+    margin-inline: 5px;
+
+}
+.orario{
+    right: 0;
 }
