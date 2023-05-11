@@ -194,8 +194,10 @@ const app = Vue.createApp({
                 }
             ],
             activeContact: 0,
-            
+            newItem: "",
+           
         };
+        
     },
 
     methods: {
@@ -204,10 +206,30 @@ const app = Vue.createApp({
 
         },
 
-
+        addItem(inputMessage) {
+            if (inputMessage !== "") {
+              const newInput = {
+                date: new Date().toLocaleString(),
+                message: inputMessage,
+                status: "sent"
+              };
+              this.contacts[this.activeContact].messages.push(newInput);
+              this.newItem = "";
+            }
+        },
+        
+        
     },
-
-
+    computed: {
+        formattedDateTime() {
+            const contact = this.contacts[this.activeContact];
+          const dateTime = contact.messages[0].date;
+          const [date, time] = dateTime.split(" ");
+          return [date, time];
+        },
+      },
+    
+    
 });
 
 app.mount('#app');
