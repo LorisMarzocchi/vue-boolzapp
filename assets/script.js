@@ -201,6 +201,7 @@ const app = Vue.createApp({
     methods: {
         selectContact(contact) {
             this.activeContact = contact;
+
         },
 
 

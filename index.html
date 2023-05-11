@@ -42,33 +42,36 @@
                 </div>
             </div>
    
-            <div class="search">
+            <div class="search d-flex align-items-center p-1">
                 <input class="form-control me-2" type="search" placeholder="Ricerca"
                     aria-label="Search">
             </div>
-
-            <div 
-                class="dinamic_card d-flex justify-content-between"
-                v-for="(element, index) in contacts"
-                :key="element.avatar"
-                :class="{ active: element === activeContact }"
-                @click="selectContact(element)">
-                
-                <div class="d-flex dinamic_user justify-content-between">
-                    <div class="d-flex">
-
-                        <div class="user_img d-flex">
-                            <img class="rounded-circle":src="element.avatar" alt="">
+            <div class="dinamic_container">
+                <div 
+                    class="dinamic_card mb-2 d-flex justify-content-between"
+                    v-for="(element, index) in contacts"
+                    :key="element.avatar"
+                    :class="{ active: element === activeContact }"
+                    @click="selectContact(element)">
+                    
+                    <div class="d-flex dinamic_user justify-content-between">
+                        <div class="d-flex">
+    
+                            <div class="user_img d-flex">
+                                <img class="rounded-circle" :src="element.avatar" alt="">
+                            </div>
+                            <div>
+                                <h6>{{element.name}}</h6>
+                                <span>{{ element.messages[element.messages.length - 1].message }}</span>  
+                                <!-- accesso a message -->
+                            </div>
                         </div>
-                        <div>
-                            <h6>{{element.name}}</h6>
-                            <span>{{ element.messages[element.messages.length - 1].message }}</span>  
+    
+                        <div class="time d-flex justify-content-between align-items-start">
+                            <span>{{ element.messages[element.messages.length - 1].date }}</span>
                         </div>
                     </div>
-
-                    <div class="time d-flex justify-content-between align-items-start">
-                        <span>{{ element.messages[element.messages.length - 1].date }}</span>
-                    </div>
+    
                 </div>
 
             </div>
@@ -78,32 +81,40 @@
             <div class="user p-3">
                 <div class="user_img d-flex me-1">
                     <img class=" rounded-circle" src="img/avatar_io.jpg" alt="">
-                    <h5>Michele</h5>
+                    <!-- <h5>{{ activeContact.name }}</h5> -->
                 </div>
-                <div class="search search_chat "><input type="search" placeholder="Cerca nella chat"></div>
+                <!-- <div class="search search_chat "><input type="search" placeholder="Cerca nella chat"></div> -->
                 <div class="icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <i class="fa-solid fa-paperclip"></i>
                 </div>
             </div>
             <div class="chat p-3">
-                <div  v-for="(message, index) in contacts[activeIndex].messages"
+                <div v-if="activeContact" v-for="(element, index) in activeContact.messages"
                 :key="index">
 
-                    <div v-if="message.status === 'sent'" class="mess_sent d-flex align-self-end">
-                     {{ message.message }}
+                    <div class=" d-flex justify-content-end">
+                        <div v-if="element.status === 'sent'" class=" d-flex align-self-end border-1 rounded-2  mess_sent">
+                         {{ element.message }}
+                         <span class="data_message"></span>
+                        </div>
                     </div>
-                    
-                    <div v-else-if="message.status === 'received'" class="mess_ricevuto">
-                     {{ message.message }}
-                    </div>
-                </div>
 
-                <!-- <div class="mess_sent d-flex align-self-end">Ciao ciao Ciao</div> -->
+                    <div class=" d-flex justify-content-start">
+                        <div v-if="element.status === 'received'" class="mess_received border-1 rounded-2">
+                            {{ element.message }}
+                        </div>
+                    </div>
+
+                </div>
             </div>
             <div class="bottom_nav d-flex justify-content-between align-items-center p-3">
                 <div class="icon"><i class="bi bi-emoji-smile"></i></div>
-                <div class="search write_message"><input type="search" placeholder="Invia un messaggio"></div>
+                <!-- <div class="search write_message"><input type="search" placeholder="Invia un messaggio"></div> -->
+                <div class="form-floating write_message">
+                    <textarea class="form-control" placeholder="" id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">nuovo messaggio</label>
+                  </div>
                 <div class="icon"><i class="fa-solid fa-microphone"></i></div>
             </div>
 
