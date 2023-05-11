@@ -193,7 +193,7 @@ const app = Vue.createApp({
                     ],
                 }
             ],
-            activeContact: null,
+            activeContact: 0,
             
         };
     },

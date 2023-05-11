@@ -57,12 +57,12 @@
                     <div class="d-flex dinamic_user justify-content-between">
                         <div class="d-flex">
     
-                            <div class="user_img d-flex">
+                            <div class="user_img me-2 d-flex">
                                 <img class="rounded-circle" :src="element.avatar" alt="">
                             </div>
                             <div>
                                 <h6>{{element.name}}</h6>
-                                <span>{{ element.messages[element.messages.length - 1].message }}</span>  
+                                <p class="user_mess">{{ element.messages[element.messages.length - 1].message }}</p>  
                                 <!-- accesso a message -->
                             </div>
                         </div>
@@ -80,8 +80,12 @@
         <div class="main">
             <div class="user p-3">
                 <div class="user_img d-flex me-1">
-                    <img class=" rounded-circle" src="img/avatar_io.jpg" alt="">
-                    <!-- <h5>{{ activeContact.name }}</h5> -->
+                    <img class=" rounded-circle" :src="activeContact.avatar" alt="">
+                    <div>
+
+                        <h5>{{ activeContact.name }}</h5>
+                        <p>Ultimo accesso {{ element[activeContact].date }}</p>
+                    </div>
                 </div>
                 <!-- <div class="search search_chat "><input type="search" placeholder="Cerca nella chat"></div> -->
                 <div class="icon">
@@ -96,7 +100,7 @@
                     <div class=" d-flex justify-content-end">
                         <div v-if="element.status === 'sent'" class=" d-flex align-self-end border-1 rounded-2  mess_sent">
                          {{ element.message }}
-                         <span class="data_message"></span>
+                         <span class="data_message">{{ element.data }}</span>
                         </div>
                     </div>
 
