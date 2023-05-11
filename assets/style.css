@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-size: 0.85rem;
 }
 body{
     height: 100vh;
@@ -80,14 +81,14 @@ img{
 .write_message input{
     width: 550px;
 }
-.mess_inviato{
+.mess_sent{
     height: 50px;
     width: 200px;
     border: 1px solid green;
     margin: 20px;
     padding: 10px;
 }
-.mess_ricevuto{
+.mess_received{
     height: 50px;
     width: 200px;
     border: 1px solid red;
@@ -101,9 +102,12 @@ i {
     margin-inline: 5px;
 
 }
-.orario{
+.time{
     right: 0;
 }
 .dinamic_user{
     width: 100%;
+}
+.active {
+    color: red;
 }

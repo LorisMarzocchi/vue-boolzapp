@@ -193,17 +193,17 @@ const app = Vue.createApp({
                     ],
                 }
             ],
-            activeContactId: null,
+            activeContact: null,
             
         };
     },
 
     methods: {
-        selectContac(contact) {
+        selectContact(contact) {
             this.activeContact = contact;
         },
 
-        
+
     },
 
 
