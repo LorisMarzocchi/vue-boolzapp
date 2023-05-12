@@ -195,6 +195,7 @@ const app = Vue.createApp({
             ],
             activeContact: 0,
             newItem: "",
+            searchUser: "",
            
         };
         
@@ -206,7 +207,7 @@ const app = Vue.createApp({
 
         },
 
-        addItem(inputMessage) {
+        addMessage(inputMessage) {
             if (inputMessage !== "") {
               const newInput = {
                 date: new Date().toLocaleString(),
@@ -215,7 +216,16 @@ const app = Vue.createApp({
               };
               this.contacts[this.activeContact].messages.push(newInput);
               this.newItem = "";
-            }
+              setTimeout(this.autoMessage, 1000);
+            };
+        },
+        autoMessage(){
+            let autoMess = {
+                date: new Date().toLocaleString(),
+                message: "ok",
+                status: "recived"
+            };
+            this.contacts[this.activeContact].messages.push(autoMess);
         },
         
         
@@ -223,11 +233,18 @@ const app = Vue.createApp({
     computed: {
         formattedDateTime() {
             const contact = this.contacts[this.activeContact];
-          const dateTime = contact.messages[0].date;
-          const [date, time] = dateTime.split(" ");
-          return [date, time];
+            const dateTime = contact.messages[0].date;
+            const [date, time] = dateTime.split(" ");
+            return [date, time];
         },
+        filter() {
+            return this.contacts.filter((contacts) => {
+                return contacts.name.toLowerCase().includes(this.searchUser.toLowerCase());
+            },
+            
+        )},
       },
+      
     
     
 });

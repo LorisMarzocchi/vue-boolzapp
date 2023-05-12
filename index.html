@@ -21,7 +21,7 @@
         <div class="sidebar">
             <div class="user p-2">
                 <div class="user_img d-flex">
-                    <img class=" rounded-circle" src="img/avatar_io.jpg" alt="">
+                    <img class=" rounded-circle" :src="contacts[activeContact].avatar" alt="">
                     <h5>Sofia</h5>
                 </div>
                 <div class="icon">
@@ -44,12 +44,12 @@
    
             <div class="search d-flex align-items-center p-1">
                 <input class="form-control me-2" type="search" placeholder="Ricerca"
-                    aria-label="Search">
+                    aria-label="Search" v-model="searchUser">
             </div>
             <div class="dinamic_container">
                 <div 
                     class="dinamic_card mb-2 d-flex justify-content-between"
-                    v-for="(element, index) in contacts"
+                    v-for="(element, index) in filter"
                     :key="index.name"
                     :class="{ active: index === activeContact }"
                     @click="selectContact(index)">
@@ -90,7 +90,6 @@
                         <span>Ultimo accesso il: {{  formattedDateTime[0] }} {{  formattedDateTime[1] }}</span>
                     </div>
                 </div>
-                <!-- <div class="search search_chat "><input type="search" placeholder="Cerca nella chat"></div> -->
                 <div class="icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <i class="fa-solid fa-paperclip"></i>
@@ -102,7 +101,6 @@
                     <div class=" d-flex justify-content-end">
                         <div v-if="element.status === 'sent'" class=" d-flex flex-column border-1 rounded-2  mess_sent">
                             {{ element.message }}
-                            <!-- <span class="data_message">{{ dataformat() }}</span> -->
                             <span class="data_message d-flex justify-content-end">{{ formattedDateTime[1] }}</span>
             
                         </div>
@@ -121,7 +119,7 @@
             </div>
             <div class="bottom_nav d-flex justify-content-between align-items-center p-3">
                 <div class="icon"><i class="bi bi-emoji-smile"></i></div>
-                <input @keyup.enter="addItem(newItem)" type="text" v-model="newItem" />
+                <input @keyup.enter="addMessage(newItem)" type="text" v-model="newItem" />
                 <div class="icon"><i class="fa-solid fa-microphone"></i></div>
             </div>
 
