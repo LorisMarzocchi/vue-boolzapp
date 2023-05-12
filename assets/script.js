@@ -229,14 +229,14 @@ const app = Vue.createApp({
         },
         
         
-    },
-    computed: {
-        formattedDateTime() {
-            const contact = this.contacts[this.activeContact];
+        formattedDateTime(contactIndex) {
+            const contact = this.contacts[this.contactIndex];
             const dateTime = contact.messages[0].date;
             const [date, time] = dateTime.split(" ");
             return [date, time];
         },
+    },
+    computed: {
         filter() {
             return this.contacts.filter((contacts) => {
                 return contacts.name.toLowerCase().includes(this.searchUser.toLowerCase());
