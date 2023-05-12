@@ -216,22 +216,36 @@ const app = Vue.createApp({
               };
               this.contacts[this.activeContact].messages.push(newInput);
               this.newItem = "";
-              setTimeout(this.autoMessage, 1000);
+              setTimeout(() => {
+                let autoMessage = {
+                    date: new Date().toLocaleString(),
+                    message: "ok",
+                    status: 'received'
+                };
+                this.contacts[this.activeContact].messages.push(autoMessage);
+                }, 1000);
             };
         },
-        autoMessage(){
-            let autoMess = {
-                date: new Date().toLocaleString(),
-                message: "ok",
-                status: "recived"
-            };
-            this.contacts[this.activeContact].messages.push(autoMess);
+        // da inserire in add message?
+        // autoMessage(){
+        //     let autoMess = {
+        //         date: new Date().toLocaleString(),
+        //         message: "ok",
+        //         status: "recived"
+        //     };
+        //     this.contacts[this.activeContact].messages.push(autoMess);
+        // }
+        
+    
+        getTimeMessage(contactIndex){
+            const contact = this.contacts[contactIndex];
+            return contact.messages[contact.messages.length - 1];
+
         },
         
         
-        formattedDateTime(contactIndex) {
-            const contact = this.contacts[this.contactIndex];
-            const dateTime = contact.messages[0].date;
+        formattedDateTime(messagee) {
+            const dateTime = messagee.date;
             const [date, time] = dateTime.split(" ");
             return [date, time];
         },
