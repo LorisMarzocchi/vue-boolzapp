@@ -79,11 +79,12 @@ img{
     padding: 5px;
     
 }
+
 .chat{
     display: flex;
     flex-direction: column;
     background-image: url(../img/mine.jpg);
-    height: 80%;
+    height: 78%;
     width: 100%;
     overflow-y: scroll;
 }
@@ -117,6 +118,7 @@ i:hover{
 i {
     color: rgb(182, 182, 182);
     margin-inline: 5px;
+    font-size: 1.2rem;
 
 }
 .time{
@@ -137,4 +139,25 @@ i {
 }
 h5, h6{
     margin: 0 !important;
+}
+.search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+.search .form-control {
+    padding-left: 2rem;
+}
+.bottom_nav input{
+    width: 80%;
+}
+.bi-emoji-smile, .fa-microphone{
+    color: rgb(128, 128, 128);
+    font-weight: 800;
 }

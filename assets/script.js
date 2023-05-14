@@ -33,7 +33,7 @@ const app = Vue.createApp({
                 {
                     name: 'Michele',
                     avatar: './img/avatar_1.jpg',
-                    
+
                     visible: true,
                     messages: [
                         {
@@ -196,71 +196,69 @@ const app = Vue.createApp({
             activeContact: 0,
             newItem: "",
             searchUser: "",
-           
+
         };
-        
+
     },
 
     methods: {
         selectContact(contact) {
-            this.activeContact = contact;
+            this.activeContact = this.contacts.indexOf(contact);
 
         },
 
         addMessage(inputMessage) {
-            if (inputMessage !== "") {
-              const newInput = {
-                date: new Date().toLocaleString(),
-                message: inputMessage,
-                status: "sent"
-              };
-              this.contacts[this.activeContact].messages.push(newInput);
-              this.newItem = "";
-              setTimeout(() => {
-                let autoMessage = {
+            if (inputMessage !== "" || inputMessage.length >= 0) {
+                const newInput = {
                     date: new Date().toLocaleString(),
-                    message: "ok",
-                    status: 'received'
+                    message: inputMessage,
+                    status: "sent"
                 };
-                this.contacts[this.activeContact].messages.push(autoMessage);
-                }, 1000);
+                this.contacts[this.activeContact].messages.push(newInput);
+                this.newItem = "";
+                setTimeout(() => {
+                    let autoMessage = {
+                        date: new Date().toLocaleString(),
+                        message: "Ok",
+                        status: 'received'
+                    };
+                    this.contacts[this.activeContact].messages.push(autoMessage);
+                }, 2000);
             };
         },
-        // da inserire in add message?
-        // autoMessage(){
-        //     let autoMess = {
-        //         date: new Date().toLocaleString(),
-        //         message: "ok",
-        //         status: "recived"
-        //     };
-        //     this.contacts[this.activeContact].messages.push(autoMess);
-        // }
-        
-    
-        getTimeMessage(contactIndex){
+
+        getTimeMessage(contactIndex) {
             const contact = this.contacts[contactIndex];
             return contact.messages[contact.messages.length - 1];
 
         },
-        
-        
+
+
         formattedDateTime(messagee) {
             const dateTime = messagee.date;
             const [date, time] = dateTime.split(" ");
             return [date, time];
         },
+
     },
+
+
     computed: {
-        filter() {
+        filterr() {
             return this.contacts.filter((contacts) => {
+
                 return contacts.name.toLowerCase().includes(this.searchUser.toLowerCase());
-            },
-            
-        )},
-      },
-      
-    
-    
+
+            })
+        },
+
+    },
+
+
+
+
 });
 
 app.mount('#app');
+
+

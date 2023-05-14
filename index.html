@@ -22,18 +22,18 @@
             <div class="user p-2">
                 <div class="user_img d-flex">
                     <img class=" rounded-circle" :src="contacts[activeContact].avatar" alt="">
-                    <h5>Sofia</h5>
+                    <h5 class=" ms-2 align-self-center">{{ contacts[activeContact].name }}</h5>
                 </div>
                 <div class="icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-circle-notch"></i>
                     <i class="fa-solid fa-message"></i>
                     <i class="fa-solid fa-list"></i>
                 </div>
             </div>
 
             <div class="notifiche align-items-center d-flex">
-                <div class="user_img d-flex">
-                    <img class=" rounded-circle" src="img/avatar_io.jpg" alt="">
+                <div class="user_img d-flex rounded-circle bg-white align-items-center justify-content-center me-2 ">
+                    <i class="bi-bell-slash-fill fs-4" style="color: #8EDAFD;"></i>
                 </div>
                 <div class=" d-flex justify-content-center flex-column">
                     <h6>Ricevi notifiche di nuovi messaggi</h6>
@@ -41,18 +41,17 @@
                     
                 </div>
             </div>
-   
             <div class="search d-flex align-items-center p-1">
-                <input class="form-control me-2" type="search" placeholder="Ricerca"
-                    aria-label="Search" v-model="searchUser">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="search" class="form-control me-2" v-model="searchUser">
             </div>
             <div class="dinamic_container">
                 <div 
                     class="dinamic_card mb-2 d-flex justify-content-between"
-                    v-for="(element, index) in filter"
-                    :key="index.name"
-                    :class="{ active: index === activeContact }"
-                    @click="selectContact(index)">
+                    v-for="(element, index) in filterr"
+                    :key="element.name"
+                    :class="{ active: element === contacts[activeContact] }"
+                    @click="selectContact(element)">
                     
                     <div class="d-flex dinamic_user justify-content-between">
                         <div class="d-flex">
@@ -68,7 +67,7 @@
                         </div>
     
                         <div class="time d-flex justify-content-between align-items-start">
-                            <span>{{ formattedDateTime(getTimeMessage(index))[1] }}</span>
+                            <span>{{ formattedDateTime(getTimeMessage(activeContact))[1] }}</span>
                         </div>
                     </div>
     
@@ -97,11 +96,11 @@
             </div>
             <div class="chat p-3">
             
-                <div v-for="(element, index) in contacts[activeContact].messages" :key="index">
+                <div v-for="element in contacts[activeContact].messages">
                     <div class=" d-flex justify-content-end">
                         <div v-if="element.status === 'sent'" class=" d-flex flex-column border-1 rounded-2  mess_sent">
                             {{ element.message }}
-                            <span class="data_message d-flex justify-content-end"></span>
+                            <span class="data_message d-flex justify-content-end">{{ formattedDateTime(element)[1] }}</span>
             
                         </div>
                     </div>
@@ -109,7 +108,7 @@
                     <div class=" d-flex justify-content-start">
                         <div v-if="element.status === 'received'" class=" d-flex flex-column mess_received border-1 rounded-2">
                             {{ element.message }}
-                            <!-- <span class="data_message d-flex justify-content-end">{{ formattedDateTime(activeContact)[0] }}</span> -->
+                            <span class="data_message d-flex justify-content-end">{{ formattedDateTime(element)[1] }}</span>
                         </div>
                     </div>
             
@@ -118,9 +117,13 @@
             
             </div>
             <div class="bottom_nav d-flex justify-content-between align-items-center p-3">
-                <div class="icon"><i class="bi bi-emoji-smile"></i></div>
-                <input @keyup.enter="addMessage(newItem)" type="text" v-model="newItem" />
-                <div class="icon"><i class="fa-solid fa-microphone"></i></div>
+                <i class="bi bi-emoji-smile"></i>
+                <!-- <div class="icon"><i class="bi bi-emoji-smile"></i></div> -->
+                <!-- <input type="search" class="form-control me-2" v-model="searchUser"> -->
+
+                <input class="form-control border-0" @keyup.enter="addMessage(newItem, activeContact)" type="search" v-model="newItem" />
+                <!-- <div class="icon"><i class="fa-solid fa-microphone"></i></div> -->
+                <i class="fa-solid fa-microphone"></i>
             </div>
 
 
