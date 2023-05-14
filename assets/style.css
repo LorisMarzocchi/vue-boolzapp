@@ -161,3 +161,6 @@ h5, h6{
     color: rgb(128, 128, 128);
     font-weight: 800;
 }
+.btnDelete{
+    font-size: 0.65rem !important;
+}

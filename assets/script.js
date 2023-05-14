@@ -215,6 +215,7 @@ const app = Vue.createApp({
                     status: "sent"
                 };
                 this.contacts[this.activeContact].messages.push(newInput);
+            
                 this.newItem = "";
                 setTimeout(() => {
                     let autoMessage = {
@@ -223,6 +224,8 @@ const app = Vue.createApp({
                         status: 'received'
                     };
                     this.contacts[this.activeContact].messages.push(autoMessage);
+              
+                    
                 }, 2000);
             };
         },
@@ -239,7 +242,12 @@ const app = Vue.createApp({
             const [date, time] = dateTime.split(" ");
             return [date, time];
         },
+        delete(index) {
 
+            index.splice(0, 1, "messaggio eliminato");
+            
+        },
+     
     },
 
 
