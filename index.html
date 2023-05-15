@@ -71,7 +71,7 @@
                         
                         </div>
                     </div>
-    
+   
                 </div>
 
             </div>
@@ -101,16 +101,19 @@
                     <div class=" d-flex justify-content-end">
                         <div v-if="element.status === 'sent'" class=" d-flex flex-column border-1 rounded-2  mess_sent">
                             {{ element.message }}
+                            <!-- {{ element.status === 'deleted' ? element.message : element.message }} -->
                             <div class=" d-flex justify-content-between align-items-center">
                                 <div class="dropdown d-flex justify-content-end">
                                     <button class="btn btnDelete" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Elimina
+                                        Opzioni
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a @click="delete(element.message)" class="dropdown-item" href="#">Elimina</a></li>
+
                                         <li><a class="dropdown-item" href="#">Modifica</a></li>
+
                                     </ul>
-                                </div>
+                                </div> 
                                 <span class="data_message d-flex justify-content-end">{{ formattedDateTime(element)[1] }}</span>
                             </div>
             

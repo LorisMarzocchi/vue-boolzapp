@@ -209,6 +209,7 @@ const app = Vue.createApp({
 
         addMessage(inputMessage) {
             if (inputMessage !== "" || inputMessage.length >= 0) {
+                                 
                 const newInput = {
                     date: new Date().toLocaleString(),
                     message: inputMessage,
@@ -217,6 +218,10 @@ const app = Vue.createApp({
                 this.contacts[this.activeContact].messages.push(newInput);
             
                 this.newItem = "";
+                this.$nextTick(() => {
+                    const container = this.$refs.chatContainer;
+                    container.scrollTop = container.scrollHeight;
+                });
                 setTimeout(() => {
                     let autoMessage = {
                         date: new Date().toLocaleString(),
@@ -224,6 +229,10 @@ const app = Vue.createApp({
                         status: 'received'
                     };
                     this.contacts[this.activeContact].messages.push(autoMessage);
+                    this.$nextTick(() => {
+                        const container = this.$refs.chatContainer;
+                        container.scrollTop = container.scrollHeight;
+                    });
               
                     
                 }, 2000);
@@ -244,9 +253,17 @@ const app = Vue.createApp({
         },
         delete(index) {
 
-            index.splice(0, 1, "messaggio eliminato");
+            index.splice(index, 1, {message: "messaggio eliminato"});
             
         },
+        // delete(index) {
+        //     contacts[activeContact].messages.splice(index, 1, 
+        //         { 
+        //             date: new Date().toLocaleString(), 
+        //             message: 'messaggio eliminato', 
+        //             status: 'sent' 
+        //         });
+        // },
      
     },
 
