@@ -193,6 +193,8 @@ const app = Vue.createApp({
                     ],
                 }
             ],
+            editedMessageIndex: -1,
+            editedMessage: "",
             activeContact: 0,
             newItem: "",
             searchUser: "",
@@ -256,20 +258,15 @@ const app = Vue.createApp({
             index.splice(index, 1, {message: "messaggio eliminato"});
             
         },
-        // delete(index) {
-        //     contacts[activeContact].messages.splice(index, 1, 
-        //         { 
-        //             date: new Date().toLocaleString(), 
-        //             message: 'messaggio eliminato', 
-        //             status: 'sent' 
-        //         });
-        // },
+        editMessage(index, editedMessage) {
+            this.contacts[this.activeContact].messages[index].message = editedMessage;
+        },
      
     },
 
 
     computed: {
-        filterr() {
+        filter() {
             return this.contacts.filter((contacts) => {
 
                 return contacts.name.toLowerCase().includes(this.searchUser.toLowerCase());
