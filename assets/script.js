@@ -193,7 +193,7 @@ const app = Vue.createApp({
                     ],
                 }
             ],
-            editedMessageIndex: -1,
+            editedMessageIndex: 0,
             editedMessage: "",
             activeContact: 0,
             newItem: "",
@@ -211,7 +211,8 @@ const app = Vue.createApp({
 
         addMessage(inputMessage) {
             if (inputMessage !== "" || inputMessage.length >= 0) {
-                                 
+                const audio = new Audio('sound/the-notification-email-143029.mp3');
+                audio.play();                
                 const newInput = {
                     date: new Date().toLocaleString(),
                     message: inputMessage,
@@ -228,14 +229,17 @@ const app = Vue.createApp({
                     let autoMessage = {
                         date: new Date().toLocaleString(),
                         message: "Ok",
-                        status: 'received'
+                        status: 'received',
+                        
                     };
                     this.contacts[this.activeContact].messages.push(autoMessage);
                     this.$nextTick(() => {
                         const container = this.$refs.chatContainer;
                         container.scrollTop = container.scrollHeight;
+                        const audio = new Audio('sound/button-124476.mp3');
+                        audio.play();
                     });
-              
+                        
                     
                 }, 2000);
             };
@@ -258,6 +262,16 @@ const app = Vue.createApp({
             index.splice(index, 1, {message: "messaggio eliminato"});
             
         },
+
+        deleteAll() {
+            // this.contacts[this.activeContact].messages[index].message = "";
+            const messages = this.contacts[this.activeContact].messages;
+            for (let i = 0; i < messages.length; i++) {
+              messages[i].message = "";
+            }
+            
+        },
+
         editMessage(index, editedMessage) {
             this.contacts[this.activeContact].messages[index].message = editedMessage;
         },

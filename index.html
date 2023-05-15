@@ -56,8 +56,17 @@
                     <div class="d-flex dinamic_user justify-content-between">
                         <div class="d-flex">
     
-                            <div class="user_img me-2 d-flex">
+                            <div class="user_img position-relative me-2 d-flex">
                                 <img class="rounded-circle" :src="element.avatar" alt="">
+                                <div class="dropdown position-absolute w-100 h-100 d-flex justify-content-end">
+                                    <button class="btn btnDelete h-100 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a @click="deleteAll(activeContact)" class="dropdown-item h-100 w-100" href="#">Elimina tutti</a></li>
+
+                                    </ul>
+                                </div> 
                             </div>
                             <div class=" pt-1">
                                 <h6>{{element.name}}</h6>
@@ -101,6 +110,8 @@
                     <div class=" d-flex justify-content-end">
                         <div v-if="element.status === 'sent'" class=" d-flex flex-column border-1 rounded-2  mess_sent">
                             {{ element.message }}
+                            <audio :src="'sound/the-notification-email-143029.mp3' + index" id="audio-msg-{{ index }}"></audio>
+
                             <!-- {{ element.status === 'deleted' ? element.message : element.message }} -->
                             <div class=" d-flex justify-content-between align-items-center">
                                 <div class="dropdown d-flex justify-content-end">
@@ -142,6 +153,7 @@
             
                     <div class=" d-flex justify-content-start">
                         <div v-if="element.status === 'received'" class=" d-flex flex-column mess_received border-1 rounded-2">
+                            <audio :src="'sound/button-124476.mp3' + index" id="audio-msg-{{ index }}"></audio>
                             {{ element.message }}
                             <span class="data_message d-flex justify-content-end">{{ formattedDateTime(element)[1] }}</span>
                         </div>
