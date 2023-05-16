@@ -198,7 +198,8 @@ const app = Vue.createApp({
             activeContact: 0,
             newItem: "",
             searchUser: "",
-
+            // showMenu: false,
+           
         };
 
     },
@@ -211,15 +212,19 @@ const app = Vue.createApp({
 
         addMessage(inputMessage) {
             if (inputMessage !== "" || inputMessage.length >= 0) {
-                const audio = new Audio('sound/the-notification-email-143029.mp3');
-                audio.play();                
                 const newInput = {
                     date: new Date().toLocaleString(),
                     message: inputMessage,
-                    status: "sent"
+                    status: "sent",
                 };
-                this.contacts[this.activeContact].messages.push(newInput);
-            
+                const activeContact = this.activeContact;
+                this.contacts[activeContact].messages.push(newInput);
+
+                // const audioSent = new Audio(this.getSoundPath('sent'));
+                // audioSent.play();
+                const audio = new Audio('sound/the-notification-email-143029.mp3');
+                audio.play();                 
+                
                 this.newItem = "";
                 this.$nextTick(() => {
                     const container = this.$refs.chatContainer;
@@ -232,18 +237,37 @@ const app = Vue.createApp({
                         status: 'received',
                         
                     };
-                    this.contacts[this.activeContact].messages.push(autoMessage);
+                    this.contacts[activeContact].messages.push(autoMessage);
+
+                    // const audioReceived = new Audio(this.getSoundPath('received'));
+                    // audioReceived.play();
+
+                    const audio = new Audio('sound/button-124476.mp3');
+                    audio.play();
+
                     this.$nextTick(() => {
                         const container = this.$refs.chatContainer;
                         container.scrollTop = container.scrollHeight;
-                        const audio = new Audio('sound/button-124476.mp3');
-                        audio.play();
                     });
                         
                     
                 }, 2000);
             };
         },
+
+        // openMenu(contact, event, index) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        //     this.showMenu = true;
+        //     this.activeContact = index;
+        // },
+
+        closeMenu() {
+            if (this.showMenu) {
+              this.showMenu = false;
+            }
+        },
+        
 
         getTimeMessage(contactIndex) {
             const contact = this.contacts[contactIndex];
@@ -268,8 +292,8 @@ const app = Vue.createApp({
             const messages = this.contacts[this.activeContact].messages;
             for (let i = 0; i < messages.length; i++) {
               messages[i].message = "";
-            }
-            
+            };
+        
         },
 
         editMessage(index, editedMessage) {

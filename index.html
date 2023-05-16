@@ -39,7 +39,7 @@
                     <h6>Ricevi notifiche di nuovi messaggi</h6>
                     <span><a href="#"> Attiva notifiche Desktop</a></span>  
                     
-                </div>
+                </div> 
             </div>
             <div class="search d-flex align-items-center p-1">
                 <span class="fa fa-search form-control-feedback"></span>
@@ -110,9 +110,8 @@
                     <div class=" d-flex justify-content-end">
                         <div v-if="element.status === 'sent'" class=" d-flex flex-column border-1 rounded-2  mess_sent">
                             {{ element.message }}
-                            <audio :src="'sound/the-notification-email-143029.mp3' + index" id="audio-msg-{{ index }}"></audio>
 
-                            <!-- {{ element.status === 'deleted' ? element.message : element.message }} -->
+                            <!-- <audio :src="'getSoundPath(element.status)' + index" id="audio-msg-{{ index }}"></audio> -->
                             <div class=" d-flex justify-content-between align-items-center">
                                 <div class="dropdown d-flex justify-content-end">
                                     <button class="btn btnDelete" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -128,7 +127,7 @@
 
                                     </ul>
                                 </div> 
-                                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="editModal" tabindex="0" aria-labelledby="editModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
@@ -153,7 +152,6 @@
             
                     <div class=" d-flex justify-content-start">
                         <div v-if="element.status === 'received'" class=" d-flex flex-column mess_received border-1 rounded-2">
-                            <audio :src="'sound/button-124476.mp3' + index" id="audio-msg-{{ index }}"></audio>
                             {{ element.message }}
                             <span class="data_message d-flex justify-content-end">{{ formattedDateTime(element)[1] }}</span>
                         </div>
